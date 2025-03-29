@@ -12,10 +12,12 @@ const uint kEmptyBrailleUnicode = 0x2800;
 
 class BrailleConverter {
 public:
-    static QString convertToBraille(
+    static QString convertToBraille(const std::vector<std::vector<bool>>& pixelData);
+    static QString convertToBrailleColor(
         const std::vector<std::vector<bool>>& pixelData,
         const std::vector<std::vector<int>>& colorData,
-        PaletteManager *paletteManager);
+        PaletteManager *paletteManager,
+        QColor backgroundColor);
 
 private:
     static QString ChunkToBrailleSymbol(const std::vector<std::vector<bool>>& chunk);

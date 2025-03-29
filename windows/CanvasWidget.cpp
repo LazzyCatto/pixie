@@ -4,8 +4,12 @@
 
 #include "CanvasWidget.h"
 
-CanvasWidget::CanvasWidget(PaletteManager *paletteManager, QWidget *parent)
-    : QWidget(parent), paletteManager(paletteManager) {
+CanvasWidget::CanvasWidget(PaletteManager *paletteManager, QSize size, QWidget *parent)
+    : QWidget(parent),
+    paletteManager(paletteManager),
+    gridWidth(size.width()),
+    gridHeight(size.height()) {
+
     setMinimumSize(gridWidth * pixelSize, gridHeight * pixelSize);
     
     // Инициализация массивов
@@ -13,6 +17,16 @@ CanvasWidget::CanvasWidget(PaletteManager *paletteManager, QWidget *parent)
     colors.resize(gridWidth / kBrailleWidth, std::vector<int>(gridHeight, 0));
 
     setMouseTracking(true); // Мышка будет ослеживаться и без нажатия
+}
+
+CanvasWidget::CanvasWidget(PaletteManager *paletteManager, QWidget *parent)
+    : CanvasWidget(paletteManager, QSize(32, 32), parent) {
+}
+
+void CanvasWidget::setGridSize(QSize gridSize) {
+    gridWidth = gridSize.width();
+    gridHeight = gridSize.height();
+    canvasRescale(gridSize);
 }
 
 void CanvasWidget::setMainColor(int colorIndex) {

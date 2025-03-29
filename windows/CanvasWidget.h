@@ -15,7 +15,9 @@ class CanvasWidget : public QWidget {
     Q_OBJECT
 
 public:
+    explicit CanvasWidget(PaletteManager *paletteManager, QSize gridSize, QWidget *parent = nullptr);
     explicit CanvasWidget(PaletteManager *paletteManager, QWidget *parent = nullptr);
+    void setGridSize(QSize gridSize);
     void setMainColor(int colorIndex);
     void setSecondaryColor(int colorIndex);
     void swapColors();
@@ -26,6 +28,7 @@ signals:
     void canvasUpdated(
         const std::vector<std::vector<bool>> &pixelData,
         const std::vector<std::vector<int>> &colorData);
+    void canvasRescale(QSize gridSize);
 
 protected:
     void paintEvent(QPaintEvent *event) override;

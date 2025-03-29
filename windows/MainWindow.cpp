@@ -44,7 +44,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
         const std::vector<std::vector<bool>> &pixelData,
         const std::vector<std::vector<int>> &colorData) {
         
-        QString braille = BrailleConverter::convertToBraille(pixelData, colorData, paletteManager);
+        QString braille = BrailleConverter::convertToBrailleColor(pixelData, colorData, paletteManager, QColor(50, 50, 50));
         previewWindow->updatePreview(braille);
     });
 
