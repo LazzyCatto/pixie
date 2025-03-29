@@ -22,7 +22,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
         canvas->setSecondaryColor(colorIndex);
     });
 
-    QDockWidget *toolDock = new QDockWidget(this);
+    // Создаем Dock-окно для инструментов
+    QDockWidget *toolDock = new QDockWidget("Инструменты", this);
     toolPanel = new ToolPanelWidget(toolDock);
     toolDock->setWidget(toolPanel);
     addDockWidget(Qt::LeftDockWidgetArea, toolDock);
@@ -30,6 +31,21 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
     // Подключаем сигнал выбора инструмента
     connect(toolPanel, &ToolPanelWidget::toolSelected, [this](DrawMode mode) {
         canvas->setDrawMode(mode);
+    });
+
+    // Создаем Dock-окно для превью
+    QDockWidget *previewDock = new QDockWidget("Превью", this);
+    previewWindow = new PreviewWindow(previewDock);
+    previewDock->setWidget(previewWindow);
+    addDockWidget(Qt::BottomDockWidgetArea, previewDock);
+
+    // Подключаем сигнал об изенение canvas к preview
+    connect(canvas, &CanvasWidget::canvasUpdated, [this](
+        const std::vector<std::vector<bool>> &pixelData,
+        const std::vector<std::vector<int>> &colorData) {
+        
+        QString braille = BrailleConverter::convertToBraille(pixelData, colorData, paletteManager);
+        previewWindow->updatePreview(braille);
     });
 
     setWindowTitle("pixie");

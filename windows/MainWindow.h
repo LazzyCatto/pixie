@@ -1,8 +1,12 @@
+#ifndef MAINWINDOW_H
+#define MAINWINDOW_H
+
 #include <QMainWindow>
 
 #include "CanvasWidget.h"
 #include "ColorPaletteWidget.h"
 #include "ToolPanelWidget.h"
+#include "PreviewWindow.h"
 #include "../managers/PaletteManager.h"
 
 class MainWindow : public QMainWindow {
@@ -16,4 +20,7 @@ private:
     CanvasWidget *canvas;
     ColorPaletteWidget *palette;
     ToolPanelWidget *toolPanel;
+    PreviewWindow * previewWindow;
 };
+
+#endif // MAINWINDOW_H

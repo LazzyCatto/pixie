@@ -14,10 +14,12 @@ add_executable(
     windows/MainWindow.cpp
     windows/CanvasWidget.cpp
     windows/ColorPaletteWidget.cpp
-    managers/PaletteManager.cpp
     windows/ToolPanelWidget.cpp
+    windows/PreviewWindow.cpp
     windows/customButtons/CustomButton.cpp
     windows/customButtons/ColorButton.cpp
+    utils/BrailleConverter.cpp
+    managers/PaletteManager.cpp
     ${RESOURCES_RCC} 
 )
 

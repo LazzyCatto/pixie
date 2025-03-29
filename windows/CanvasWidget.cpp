@@ -1,5 +1,6 @@
 #include <QPainter>
 #include <QMouseEvent>
+#include <QDebug>
 
 #include "CanvasWidget.h"
 
@@ -7,7 +8,7 @@ CanvasWidget::CanvasWidget(PaletteManager *paletteManager, QWidget *parent)
     : QWidget(parent), paletteManager(paletteManager) {
     setMinimumSize(gridWidth * pixelSize, gridHeight * pixelSize);
     
-    // Инициализируем массив белыми пикселями
+    // Инициализация массивов
     pixels.resize(gridWidth, std::vector<bool>(gridHeight, false));
     colors.resize(gridWidth / kBrailleWidth, std::vector<int>(gridHeight, 0));
 
@@ -86,6 +87,7 @@ void CanvasWidget::paintEvent(QPaintEvent *event) {
 void CanvasWidget::setPixelState(int x, int y, bool state) {
     if (x >= 0 && x < gridWidth && y >= 0 && y < gridHeight) {
         pixels[x][y] = state;
+        emit canvasUpdated(pixels, colors);
         update();  // Перерисовываем виджет
     }
 }
@@ -94,6 +96,7 @@ void CanvasWidget::setPixelState(int x, int y, bool state) {
 void CanvasWidget::setChunkColor(int x, int y, int colorIndex) {
     if (x >= 0 && x < gridWidth / kBrailleWidth && y >= 0 && y < gridHeight / kBrailleHeight) {
         colors[x][y] = colorIndex;
+        emit canvasUpdated(pixels, colors);
         update();  // Перерисовываем виджет
     }
 }

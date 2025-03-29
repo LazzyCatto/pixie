@@ -5,9 +5,7 @@
 #include <vector>
 
 #include "../managers/PaletteManager.h"
-
-const int kBrailleWidth = 2;
-const int kBrailleHeight = 4;
+#include "../utils/BrailleConverter.h"
 
 enum class DrawMode {
     DRAW, ERASE, COLOR
@@ -23,6 +21,11 @@ public:
     void swapColors();
     void setPaletteManager(PaletteManager *paletteManager);
     void setDrawMode(DrawMode mode);
+
+signals:
+    void canvasUpdated(
+        const std::vector<std::vector<bool>> &pixelData,
+        const std::vector<std::vector<int>> &colorData);
 
 protected:
     void paintEvent(QPaintEvent *event) override;
