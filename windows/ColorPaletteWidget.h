@@ -22,10 +22,6 @@ signals:
     void mainColorSelected(int colorIndex);
     void secondaryColorSelected(int colorIndex);
 
-protected:
-    // void paintEvent(QPaintEvent *event) override;
-    // void mousePressEvent(QMouseEvent *event) override;
-
 private:
     int mainColorIndex = 0;       // Выбранный индекс главного цвета
     int secondaryColorIndex = 0;  // Выбранный индекс второго цвета

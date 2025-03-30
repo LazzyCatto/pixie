@@ -14,7 +14,6 @@ PreviewWindow::PreviewWindow(QSize gridSize, QWidget *parent) : QWidget(parent) 
     QFont font = QFontDatabase::systemFont(QFontDatabase::FixedFont);
     font.setLetterSpacing(QFont::AbsoluteSpacing, 0);
     label->setFont(font);
-    label->setText("<html><body><span style='color: rgb(0, 0, 200z);'>d</span></body></html>");
 
 
     layout->addWidget(label);
@@ -33,3 +32,4 @@ void PreviewWindow::updatePreview(const QString &text) {
 void PreviewWindow::setGridSize(QSize gridSize) {
     setFixedSize(gridSize.width() * kFontScale, gridSize.height() * kFontScale);
 }
+

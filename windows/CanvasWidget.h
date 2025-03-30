@@ -15,6 +15,9 @@ class CanvasWidget : public QWidget {
     Q_OBJECT
 
 public:
+    std::vector<std::vector<bool>> pixels;  // Массив цветов пикселей
+    std::vector<std::vector<int>> colors;   // Массив индексов цветов пикселей
+
     explicit CanvasWidget(PaletteManager *paletteManager, QSize gridSize, QWidget *parent = nullptr);
     explicit CanvasWidget(PaletteManager *paletteManager, QWidget *parent = nullptr);
     void setGridSize(QSize gridSize);
@@ -51,9 +54,6 @@ private:
     QPoint lastMousePos;    // Последняя позиция мыши (для перемещения)
     QPoint currentMousePos; // Позиция мышки (для подсвечивания текущей клетки)
     bool lastMouseState;    // true - левая кнопка мыши, false - правая
-
-    std::vector<std::vector<bool>> pixels;  // Массив цветов пикселей
-    std::vector<std::vector<int>> colors;  // Массив индексов цветов пикселей
 
     DrawMode mode = DrawMode::DRAW;  // Кисть
 
